@@ -94,28 +94,38 @@ if (slideEls.length && prevBtn && nextBtn) {
 // Contact Form Logic (Contact Page)
 // This form is frontend-only. To enable email sending, integrate a service
 // such as EmailJS, Formspree, or a custom backend endpoint.
-const form = document.getElementById('contactForm');
-const status = document.getElementById('formStatus');
-form.addEventListener('submit', function(e) {
-e.preventDefault();
-const name = document.getElementById('name').value.trim();
-const email = document.getElementById('email').value.trim();
-const message =document.getElementById('message').value.trim();
-if(!name || !email || !message) {
-status.textContent = "Please fill all fields.";
-status.style.color = "red";
-return;
-}
-// --- CHANGE THIS TO YOUR WHATSAPP NUMBER ---
-// Use with country code, no +, no spaces. Ex: Sri Lanka 94 + number
-const yourWhatsAppNumber = "94765264505";
-const whatsappText = 'New Message from SR. Website:%0A%OA*Name :* ${name}%OA*Email :* ${email}%OA*Message :* ${message}';
-const whatsappUrl ='https://wa.me/${yourWhatsAppNumber}?text=${whatsappText}';
-// Open WhatsApp
-window.open(whatsappUrl,'_blank');
-status.textContent = "Opening WhatsApp ... ";
-status.style.color ="green";
-form.reset();
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  if (!name || !email || !message) {
+    document.getElementById("formStatus").textContent =
+      "Please fill in all fields.";
+    return;
+  }
+
+  // Replace with your WhatsApp number
+  // Include country code, without +, spaces, or dashes.
+  const whatsappNumber = "94765264505";
+
+  const whatsappMessage =
+    `Hello, I received a message from my website.%0A%0A` +
+    `*Name:* ${encodeURIComponent(name)}%0A` +
+    `*Email:* ${encodeURIComponent(email)}%0A` +
+    `*Message:* ${encodeURIComponent(message)}`;
+
+  const whatsappURL =
+    `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+  window.open(whatsappURL, "_blank");
+
+  document.getElementById("formStatus").textContent =
+    "Opening WhatsApp...";
+
+  document.getElementById("contactForm").reset();
 });
 
    
