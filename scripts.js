@@ -94,44 +94,31 @@ if (slideEls.length && prevBtn && nextBtn) {
 // Contact Form Logic (Contact Page)
 // This form is frontend-only. To enable email sending, integrate a service
 // such as EmailJS, Formspree, or a custom backend endpoint.
-const contactForm = document.getElementById("contactForm");
-
-const formStatus = document.getElementById("formStatus");
-const submitBtn = document.getElementById("submitBtn");
-const whatsappnumber = "0765264505";
-
-if (contactForm) {
-  contactForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    if (!contactForm.checkValidity()) {
-      contactForm.reportValidity();
-      return;
-    }
-
-    // Get values
-const nameVal = document.getElementByld("name").value.trim();
-const emailVal = document.getElementByld("email").value.trim();
-const msgVal = document.getElementByld("message").value.trim();
-// Button feedback
-const btnSpan = submitBtn.querySelector("span");
-const originalText = btnSpan.textContent;
-btnSpan.textContent = "Sending ... ";
-submitBtn.disabled = true;
-formStatus.textContent ="",
-formStatus.className = "form-status";
-// WhatsApp Message Format
-const whatsappText = '*New Contact Message*%0A%OA*Name :* ${nameVal}%0A*Email :* ${emailVal)%0A*Message :* ${msgVal}';
-const whatsappUrl = 'https://wa.me/${whatsappnumber}?text=${whatsappText}';
-setTimeout(()=>{
+const form = document.getElementById('contactForm');
+const status = document.getElementById('formStatus');
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+const name = document.getElementById('name').value.trim();
+const email = document.getElementById('email').value.trim();
+const message =document.getElementById('message').value.trim();
+if(!name || !email || !message) {
+status.textContent = "Please fill all fields.";
+status.style.color = "red";
+return;
+}
+// --- CHANGE THIS TO YOUR WHATSAPP NUMBER ---
+// Use with country code, no +, no spaces. Ex: Sri Lanka 94 + number
+const yourWhatsAppNumber = "94765264505";
+const whatsappText = 'New Message from SR. Website:%0A%OA*Name :* ${name}%OA*Email :* ${email}%OA*Message :* ${message}';
+const whatsappUrl ='https://wa.me/${yourWhatsAppNumber}?text=${whatsappText}';
+// Open WhatsApp
 window.open(whatsappUrl,'_blank');
-formStatus.textContent = "Redirected to WhatsApp!";
-formStatus.className = "form-status success";
-btnSpan.textContent = originalText;
-submitBtn.disabled = false;
-contactForm.reset();
-}, 800);
-  });
+status.textContent = "Opening WhatsApp ... ";
+status.style.color ="var( -- text-main)";
+form.reset();
+});
+
+   
 
   
 }
