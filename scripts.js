@@ -114,7 +114,7 @@ const whatsappUrl ='https://wa.me/${yourWhatsAppNumber}?text=${whatsappText}';
 // Open WhatsApp
 window.open(whatsappUrl,'_blank');
 status.textContent = "Opening WhatsApp ... ";
-status.style.color ="var( -- text-main)";
+status.style.color ="green";
 form.reset();
 });
 
