@@ -104,6 +104,7 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
   if (!name || !email || !message) {
     document.getElementById("formStatus").textContent =
       "Please fill in all fields.";
+    formStatus.style.color="red";
     return;
   }
 
@@ -124,7 +125,7 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
 
   document.getElementById("formStatus").textContent =
     "Opening WhatsApp...";
-
+formStatus.style.color="green";
   document.getElementById("contactForm").reset();
 });
 
